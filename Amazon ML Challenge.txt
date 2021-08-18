@@ -1,0 +1,26 @@
+﻿Amazon ML Challenge
+The-Miner-League
+
+
+Tools:
+* Pandas
+* CSV
+* Numpy
+* RE
+* Time (sleep)
+* NLTK (Stopwords, WordNetLemmatizer)
+* Collections (Counter)
+* Sklearn.preprocessing (LabelEncoder)
+* Sklearn.feature_extraction.text (HashVectorizer)
+* Sklearn.naive_bayes (MultinomialNB)
+
+
+Approach:
+* Initially we imported the dataset and for the training set, simply removed all the rows that contained any NaN values & for the test set, we replaced all the NaN values with “ ” i.e. a blank space.
+* We then converted the column data types to string for both the training and the test set.
+* Then we converted the columns: “TITLE”, “DESCRIPTION” AND “BULLET_POINTS” into a single column containing the data of these columns.
+* Also we converted the “BRANDS” column to lower case to avoid any two brands with same names but different casing to have different labels when applying Ordinal Encoding.
+* After this, we removed all the stopwords and converted to lowercase- the column containing - “TITLE”, “DESCRIPTION” AND “BULLET_POINTS” also we applied Lemmatization to the words in this column and also we kept only the 10 most frequently occurring words in each row.
+* Then, we converted this column to a bag of words model, applying HashVectorizer’s partial_fit on the training data and transform on the testing data also considering only 1500 most relevant hashes.
+* Now since the brands were categories we applied LabelEncoding to Label Encode the data on the training and test set.
+* In the End, the Model was trained on Naive Bayes-MultonialNB using partial_fit to train data in batches of 25,000 data points each and this model was trained 4 times to increase accuracy. Also prediction was done in batches of 500 data points each.
